@@ -68,7 +68,7 @@ def annotate(document):
 
             return grouped_anns
 
-        except Exception, excp:
+        except Exception, exc:
 
             if i == max_retries:
                 raise Exception('TagMe annotation errors for Document {0}.\

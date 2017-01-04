@@ -8,7 +8,7 @@ Set up a json file in `keyphrase-extraction/configuration.json`:
 
 	{
 		"tagme-token": "TagMe authorization token",
-		"keyphrase-data": "Path to keyphrase-data.zip"
+		"keyphrase-data": "Path to keyphrase_data.zip"
 	}
 
 where the `tagme-token` can be retrieved by following `Installation and setup` section available [here](https://github.com/marcocor/tagme-python).
