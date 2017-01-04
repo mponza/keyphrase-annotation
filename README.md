@@ -1,4 +1,4 @@
-Keyphrase Datasets Annotation via TagMe
+Keyphrase Dataset Annotation via TagMe
 =======================================
 
 Setting Up

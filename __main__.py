@@ -25,6 +25,9 @@ def annotate(dataset_name, output_dir, threads=None):
 
 @baker.command
 def annotate_all(main_output_dir):
+	"""
+    Annotates all dataset and save outputs into main_output_dir.
+    """
 	for dataset_name, output_name in DATA_OUTPUT.items():
 		output_dir = os.path.join(main_output_dir, output_name)
 		annotate(dataset_name, output_dir)
