@@ -4,7 +4,7 @@ Keyphrase Dataset Annotation via TagMe
 Setting Up
 ----------
 
-Set up a json file in `keyphrase-extraction/configuration.json`:
+Set up a json file in `keyphrase-annotation/configuration.json`:
 
 	{
 		"tagme-token": "TagMe authorization token",
@@ -20,7 +20,7 @@ Installing Dependencies
 
 If you won't install dependencies system-wide use some virtualization tool, like [Virtualenv](https://virtualenv.pypa.io/en/stable/). Then just install dependencies with:
 
-	pip install -r path_to_requirements.txt
+	pip install -r keyphrase-annotation/requirements.txt
 
 
 Running
@@ -37,17 +37,17 @@ where `dataset_name` can be:
  * `inspec-train`, `inspec-val` or `inspec-test` for Inspec training, validation or test datasets, respectively.
  * `nus` for the NUSkeyphraseCorpus dataset.
 
-You can also annotate all datasets by typing:
+You can also annotate all datasets at once by typing:
 
 	python keyphrase-annotation annotate_all output_dir
 
-and the annotations for each dataset will be saved the corresponding in folder into `output_dir` (example: the annotations of the DUC-2001 dataset will be saved into `output_dir/duc`).
+and the annotations for each dataset will be saved in the corresponding folder inside `output_dir` (for example, the annotations of the DUC-2001 dataset will be saved into `output_dir/duc`).
 
 
 Output
 ------
 
-For each document a json file with TagMe annotations will be generated  in the specified folder. Each json file has the following structure:
+For each document a json file with TagMe annotations will be generated in the specified folder. Each json file has the following structure:
 
 	{
 		"tagme":
