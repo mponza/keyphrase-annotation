@@ -30,7 +30,6 @@ def annotate_all(main_output_dir):
 		annotate(dataset_name, output_dir)
 
 
-
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     baker.run()

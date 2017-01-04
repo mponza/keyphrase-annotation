@@ -12,6 +12,10 @@ logger = getLogger(__name__)
 
 
 def tagme_annotation(dataset, outputdir, threads=None):
+    """
+    Annotates each document of dataset and save its annotations
+    into a json file.
+    """
     threads = 8 if threads is None else threads
     
     documents = [document for document in dataset]
