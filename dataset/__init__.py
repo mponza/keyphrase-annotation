@@ -2,6 +2,7 @@ from duc import DUCDataset
 from icsi import ICSIASRDataset, ICSIHumanTranscriptDataset
 from inspec import InspectTrainingDataset, InspectValidationDataset, \
                     InspectTestDataset
+from nus import NUSDataset
 
 
 def make_dataset(dataset_name):
@@ -17,7 +18,8 @@ def make_dataset(dataset_name):
 
         'inspec-train': InspectTrainingDataset(),
         'inspec-val': InspectValidationDataset(),
-        'inspec-test': InspectTestDataset()
+        'inspec-test': InspectTestDataset(),
 
+        'nus': NUSDataset()
 
     }[dataset_name]

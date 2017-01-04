@@ -25,18 +25,16 @@ def tagme_annotation(dataset, outputdir, threads=None):
     if not os.path.exists(outputdir):
         os.makedirs(outputdir)
 
+    errors = []
     for document, doc_anns in zip(documents, annotations):
         if doc_anns is None:
+            errors.append(document.name)
             continue
 
-        json_doc = {
-            # 'content': document.content,
-            'tagme': doc_anns
-        }
+        json_doc = {'tagme': doc_anns}
 
         filename = os.path.join(outputdir, document.name + '.json')
         json.dump(json_doc, open(filename, 'w'), indent=4, sort_keys=True)
 
-    errors = len([a for a in annotations if a is None])
-    if errors > 0:
-        logger.warning('{0} documents have been skipped because annotation errors.'.format(errors))
+    if len(errors) > 0:
+        logger.warning('{0} documents have been skipped because annotation errors.'.format(len(errors)))

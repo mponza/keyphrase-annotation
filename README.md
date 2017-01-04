@@ -26,6 +26,8 @@ If you won't install dependencies system-wide use some virtualization tool, like
 Run
 ----
 
+You can annotate a dataset with:
+
 	python keyphrase-annotation dataset_name output_dir
 
 where `dataset_name` can be:

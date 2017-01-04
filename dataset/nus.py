@@ -11,7 +11,7 @@ class NUSDataset(BaseDataset):
     Class for managing NUSkeyphraseCorpus dataset.
     """
 
-	def _data_files(self, zippath):
+    def _data_files(self, zippath):
         """
         Iterates over the files in /keyphrase_data/NUSkeyphraseCorpus.zip.
         """
@@ -26,6 +26,6 @@ class NUSDataset(BaseDataset):
     
     def _build_document(self, f):
         name = os.path.basename(f.name).split('.')[0].decode('utf-8')
-        return Document(name, f.read().decode('utf-8'))
 
-
+        # standard decode function gives unicode errors
+        return Document(name, unicode(f.read(), errors='replace'))
