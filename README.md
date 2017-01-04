@@ -4,7 +4,7 @@ Keyphrase Datasets Annotation via TagMe
 Setting Up
 ----------
 
-Set up the configuration file in `keyphrase-extraction/configuration.json`:
+Set up a json file in `keyphrase-extraction/configuration.json`:
 
 	{
 		"tagme-token": "TagMe authorization token",
