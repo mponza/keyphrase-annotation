@@ -26,16 +26,22 @@ If you won't install dependencies system-wide use some virtualization tool, like
 Run
 ----
 
-You can annotate a dataset with:
+You can annotate a single dataset with:
 
-	python keyphrase-annotation dataset_name output_dir
+	python keyphrase-annotation annotate dataset_name output_dir
 
 where `dataset_name` can be:
 
-	* `duc` for the DUC-2001 dataset.
-	* `icsi-asr` or `icsi-ht` for ICSI ASR_Output or Human_Transcript datasets, respectively.
-	* `inspec-train`, `inspec-val` or `inspec-test` for Inspec training, validation or test datasets, respectively.
-	* `nus` for the NUSkeyphraseCorpus dataset.
+ * `duc` for the DUC-2001 dataset.
+ * `icsi-asr` or `icsi-ht` for ICSI ASR_Output or Human_Transcript datasets, respectively.
+ * `inspec-train`, `inspec-val` or `inspec-test` for Inspec training, validation or test datasets, respectively.
+ * `nus` for the NUSkeyphraseCorpus dataset.
+
+You can also annotate all datasets by typing:
+
+	python keyphrase-annotation annotate_all output_dir
+
+and the annotations for each dataset will be saved the corresponding in folder into `output_dir` (example: the annotations of the DUC-2001 dataset will be saved into `output_dir/duc`).
 
 
 Output
