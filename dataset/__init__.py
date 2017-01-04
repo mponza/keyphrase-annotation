@@ -1,11 +1,23 @@
 from duc import DUCDataset
+from icsi import ICSIASRDataset, ICSIHumanTranscriptDataset
+from inspec import InspectTrainingDataset, InspectValidationDataset, \
+                    InspectTestDataset
+
 
 def make_dataset(dataset_name):
-	"""
-	Factory-style method for getting dataset from string name.
-	"""
-	return {
+    """
+    Factory-style method for getting dataset from string name.
+    """
+    return {
 
-		'duc': DUCDataset()
+        'duc': DUCDataset(),
 
-	}[dataset_name]
+        'icsi-asr': ICSIASRDataset(),
+        'icsi-ht': ICSIHumanTranscriptDataset(),
+
+        'inspec-train': InspectTrainingDataset(),
+        'inspec-val': InspectValidationDataset(),
+        'inspec-test': InspectTestDataset()
+
+
+    }[dataset_name]
