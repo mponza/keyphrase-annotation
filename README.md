@@ -68,4 +68,4 @@ For each document a json file with TagMe annotations will be generated in the sp
 	        ]
 	}
 
-The `tagme` field contains a list of Wikipedia Entities (each entity is uniquely identified by its `wiki_title`/`wiki_id`) annotated in the input document. For each annotated entity, `annotations` provides information where the corresponding entity has been annotated in the document.
+The `tagme` field contains a list of Wikipedia Entities (each entity is uniquely identified by its `wiki_title`/`wiki_id`) annotated in the input document. For each annotated entity, `annotations` provides information where the corresponding entity has been annotated in the document. `score` is the TagMe  coherence score between that annotation and the others in the surrounding text.
