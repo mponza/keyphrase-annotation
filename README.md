@@ -23,8 +23,8 @@ If you won't install dependencies system-wide use some virtualization tool, like
 	pip install -r path_to_requirements.txt
 
 
-Run
-----
+Running
+-------
 
 You can annotate a single dataset with:
 
@@ -47,7 +47,7 @@ and the annotations for each dataset will be saved the corresponding in folder i
 Output
 ------
 
-For each document a json file with TagMe annotations will be generated  in the specified `output_dir`. Each json file has the following structure:
+For each document a json file with TagMe annotations will be generated  in the specified folder. Each json file has the following structure:
 
 	{
 		"tagme":
@@ -68,5 +68,4 @@ For each document a json file with TagMe annotations will be generated  in the s
 	        ]
 	}
 
-The `tagme` field contains a list of Wikipedia Entities (identified by `wiki_title`/`wiki_id`) annotated in the input document. For each annotated entity, `annotations` provides information where the corresponding entity has been annotated in the document.
-
+The `tagme` field contains a list of Wikipedia Entities (each entity is uniquely identified by its `wiki_title`/`wiki_id`) annotated in the input document. For each annotated entity, `annotations` provides information where the corresponding entity has been annotated in the document.
