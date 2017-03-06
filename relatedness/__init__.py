@@ -11,6 +11,7 @@ from relate import entity_pairs_relatedness
 logger = getLogger(__name__)
 
 
+
 def tagme_relatedness(dataset_dir, output_dir):
     """
     Enhances each document of documents_dir with the relatedness between its
@@ -31,8 +32,7 @@ def tagme_relatedness(dataset_dir, output_dir):
         outfilename = os.path.join(output_dir, doc_name)
         output_filenames.append(outfilename)
 
-
-    relates = Pool(24).map(entity_pairs_relatedness, tagme_docs)
+    relates = Pool(8).map(entity_pairs_relatedness, tagme_docs)
 
     errors = 0
     for i in range(0, len(relates)):

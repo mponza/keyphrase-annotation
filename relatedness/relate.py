@@ -1,4 +1,5 @@
 import tagme
+import time
 
 from itertools import combinations
 from utils.configuration import CONFIG
@@ -46,12 +47,10 @@ def entity_pairs_relatedness(annotated_document):
 
     where 'score' is the value of the Milne-Witten relatedness function.
     """
-    
+
     # rho_treshold = lambda annotations: any(a['score'] >= 0.0 for a in annotations)
 
     entities = [a['wiki_id'] for a in annotated_document['tagme']]
-
-    logger.info('{0}'.format(len(entities)))
 
     if len(entities) <= 1:
         return []
@@ -59,9 +58,9 @@ def entity_pairs_relatedness(annotated_document):
     max_retries = 3
     for i in xrange(1, max_retries + 1):
         try:
-            logger.info('{0} entities'.format(len(entities)))
             entity_pairs = list(combinations(entities, 2))
 
+            logger.info('Sending Relatedness request...')
             related_annotations = tagme.relatedness_wid(entity_pairs)
 
             relatedness = []
@@ -76,7 +75,6 @@ def entity_pairs_relatedness(annotated_document):
                     'score': rel_score}
                     )
 
-            logger.info('Computed {0} relatedness from one single documents'.format(len(entity_pairs)))
             return relatedness
 
         except Exception, exc:
@@ -89,3 +87,4 @@ def entity_pairs_relatedness(annotated_document):
             else:
                 logger.warning('Errors while computing relatedness \
                                 {0} attempt. Error: {1}'.format(i, exc))
+                time.sleep(5)
