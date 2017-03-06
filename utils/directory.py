@@ -1,5 +1,5 @@
-# Default data names and output directory (only for annotate_all command)
-DATA_OUTPUT = {
+# Default data names and their directory
+DATASET_DIRS = {
                 'duc': 'duc',
 
                 'icsi-asr': 'icsi/asr',

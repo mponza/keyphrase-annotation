@@ -1,7 +1,6 @@
 import tagme
 
 from logging import getLogger
-
 from utils.configuration import CONFIG
 
 logger = getLogger(__name__)
