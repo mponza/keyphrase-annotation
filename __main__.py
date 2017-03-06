@@ -53,11 +53,6 @@ def relatedness(datasets_dir, output_dir):
                     .format(dataset_name))
         tagme_relatedness(dataset_dir, output_dir)
 
-    
-
-
-
-
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)

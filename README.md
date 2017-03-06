@@ -23,12 +23,12 @@ If you won't install dependencies system-wide use some virtualization tool, like
 	pip install -r keyphrase-annotation/requirements.txt
 
 
-Running
--------
+Running TagMe Annotator
+-----------------------
 
 You can annotate a single dataset with:
 
-	python keyphrase-annotation annotate dataset_name output_dir
+	python keyphrase-annotation annotate dataset_name annotation_dir
 
 where `dataset_name` can be:
 
@@ -39,13 +39,10 @@ where `dataset_name` can be:
 
 You can also annotate all datasets at once by typing:
 
-	python keyphrase-annotation annotate_all output_dir
+	python keyphrase-annotation annotate_all annotation_dir
 
-and the annotations for each dataset will be saved in the corresponding folder inside `output_dir` (for example, the annotations of the DUC-2001 dataset will be saved into `output_dir/duc`).
+and the annotations for each dataset will be saved in the corresponding folder inside `annotation_dir` (for example, the annotations of the DUC-2001 dataset will be saved into `annotation_dir/duc`).
 
-
-Output
-------
 
 For each document a json file with TagMe annotations will be generated in the specified folder. Each json file has the following structure:
 
@@ -69,3 +66,31 @@ For each document a json file with TagMe annotations will be generated in the sp
 	}
 
 The `tagme` field contains a list of Wikipedia Entities (each entity is uniquely identified by its `wiki_title`/`wiki_id`) annotated in the input document. For each annotated entity, `annotations` provides information where the corresponding entity has been annotated in the document. `score` is the TagMe  coherence score between that annotation and the others in the surrounding text.
+
+
+
+Running TagMe Relatedness
+-------------------------
+
+The datasets annotated with TagMe can be futher enhanced with the relatedness score of entity pairs:
+
+	python keyphrase-annotation relatedness annotation_dir relate_dir
+
+where `annotation_dir` is the directory previously used to store the TagMe annotations and `relate_dir` is the new output directory.
+
+The previous annotations will be preserved and enhanced with the relatedness scores between all pairs of entities contained in the corresponding document:
+
+	{
+		"tagme": see tagme field above
+
+		"relatedness":
+			[
+				{
+					"src_wiki_id":	int,
+					"dst_wiki_id":	int,
+					"score":		float
+				}
+			]
+	}
+
+where `score` is thre Milne&Witten relatedness score between `src_wiki_id` and `dst_wiki_id`.

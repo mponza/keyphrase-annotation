@@ -50,7 +50,8 @@ def entity_pairs_relatedness(annotated_document):
     max_retries = 3
     for i in xrange(1, max_retries + 1):
         try:
-            related_annotations = tagme.relatedness_wid(combinations(entities, 2))
+            entity_pairs = list(combinations(entities, 2))
+            related_annotations = tagme.relatedness_wid(entity_pairs)
 
             relatedness = []
             for entity_pair, rel_score in related_annotations:
