@@ -1,6 +1,5 @@
 import tagme
 
-
 from itertools import combinations
 from utils.configuration import CONFIG
 from logging import getLogger
@@ -8,6 +7,9 @@ from logging import getLogger
 logger = getLogger(__name__)
 
 tagme.GCUBE_TOKEN = CONFIG['tagme-token']
+
+import requests.packages.urllib3
+requests.packages.urllib3.disable_warnings()
 
 
 
@@ -44,13 +46,22 @@ def entity_pairs_relatedness(annotated_document):
 
     where 'score' is the value of the Milne-Witten relatedness function.
     """
+    
+    # rho_treshold = lambda annotations: any(a['score'] >= 0.0 for a in annotations)
 
     entities = [a['wiki_id'] for a in annotated_document['tagme']]
+
+    logger.info('{0}'.format(len(entities)))
+
+    if len(entities) <= 1:
+        return []
 
     max_retries = 3
     for i in xrange(1, max_retries + 1):
         try:
+            logger.info('{0} entities'.format(len(entities)))
             entity_pairs = list(combinations(entities, 2))
+
             related_annotations = tagme.relatedness_wid(entity_pairs)
 
             relatedness = []
@@ -65,13 +76,14 @@ def entity_pairs_relatedness(annotated_document):
                     'score': rel_score}
                     )
 
+            logger.info('Computed {0} relatedness from one single documents'.format(len(entity_pairs)))
             return relatedness
 
         except Exception, exc:
 
             if i == max_retries:
                 raise Exception('TagMe Relatedness error.\
-                                Maximum attempts reached. {1}'.format(exc))
+                                Maximum attempts reached. {0}'.format(exc))
                 return None
 
             else:

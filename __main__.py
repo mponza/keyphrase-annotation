@@ -46,14 +46,14 @@ def relatedness(datasets_dir, output_dir):
     @output_dir     keyphrase dataset dir enhanced with the relatedness between entity pairs
     """
     for dataset_name, dir_name in DATASET_DIRS.items():
-        dataset_dir = os.path.join(datasets_dir, dir_name)
-        output_dir = os.path.join(output_dir, dir_name)
+        data_dir = os.path.join(datasets_dir, dir_name)
+        out_data_dir = os.path.join(output_dir, dir_name)
 
         logger.info('Computing Relatedness for entity pairs of dataset {0}'
                     .format(dataset_name))
-        tagme_relatedness(dataset_dir, output_dir)
+        tagme_relatedness(data_dir, out_data_dir)
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(format="%(asctime)-15s %(message)s",level=logging.INFO,datefmt='%Y-%m-%d %H:%M:%S')
     baker.run()
