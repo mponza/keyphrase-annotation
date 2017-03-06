@@ -66,6 +66,9 @@ def entity_pairs_relatedness(annotated_document):
             relatedness = []
             for entity_pair, rel_score in related_annotations:
 
+                if rel_score <= 0:
+                    continue
+
                 src = entity_pair[0]
                 dst = entity_pair[1]
 

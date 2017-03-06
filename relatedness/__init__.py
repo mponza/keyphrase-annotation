@@ -35,16 +35,16 @@ def tagme_relatedness(dataset_dir, output_dir):
 
     errors = 0
     i = 0
+    pool = Pool(8)
     for chunk_docs in chunkize(tagme_docs, 8):
-        relates = Pool(8).map(entity_pairs_relatedness, chunk_docs)
+        relates = pool.map(entity_pairs_relatedness, chunk_docs)
 
         for j in range(i, i + 8):
             annotated_document = tagme_docs[j]
             annotated_document = tagme_docs[j]
 
-            nonzero = [r for r in relates[j] if r['score'] > 0]
-            annotated_document['relatedness'] = nonzero
-            
+            annotated_document['relatedness'] = relates[j % 8]
+
             outfilename = output_filenames[j]
 
             if annotated_document['relatedness'] is None:
