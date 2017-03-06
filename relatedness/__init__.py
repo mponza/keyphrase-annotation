@@ -4,6 +4,7 @@ import progressbar
 
 from logging import getLogger
 from multiprocessing import Pool
+from gensim.utils import chunkize
 
 from relate import entity_pairs_relatedness
 
@@ -32,25 +33,54 @@ def tagme_relatedness(dataset_dir, output_dir):
         outfilename = os.path.join(output_dir, doc_name)
         output_filenames.append(outfilename)
 
-    relates = Pool(8).map(entity_pairs_relatedness, tagme_docs)
-
     errors = 0
-    for i in range(0, len(relates)):
-        annotated_document = tagme_docs[i]
-        annotated_document['relatedness'] = relates[i]
-        outfilename = output_filenames[i]
+    i = 0
+    for chunk_docs in chunkize(tagme_docs, 8):
+        relates = Pool(8).map(entity_pairs_relatedness, chunk_docs)
 
-        if annotated_document['relatedness'] is None:
-            logger.error('Relatedness errors for document {0}. Skipped.'
-                            .format(input_filename))
-            errors += 1
+        for j in range(i, i + 8):
+            annotated_document = tagme_docs[j]
+            annotated_document = tagme_docs[j]
 
-        outdir = os.path.dirname(outfilename)
-        if not os.path.exists(outdir):
-            os.makedirs(outdir)
+            nonzero = [r for r in relates[j] if r['score'] > 0]
+            annotated_document['relatedness'] = nonzero
+            
+            outfilename = output_filenames[j]
 
-        with open(outfilename, 'w') as f:
-           json.dump(annotated_document, f, indent=4, sort_keys=True)
+            if annotated_document['relatedness'] is None:
+                logger.error('Relatedness errors for document {0}. Skipped.'
+                                .format(input_filename))
+                errors += 1
+
+            outdir = os.path.dirname(outfilename)
+            if not os.path.exists(outdir):
+                os.makedirs(outdir)
+
+            with open(outfilename, 'w') as f:
+               json.dump(annotated_document, f, indent=4, sort_keys=True)
+
+        i += len(chunk_docs)
+        logger.info('Entity Pair Relatedness computed for {0} documents.'
+                    .format(i))
+
+
+    # errors = 0
+    # for i in range(0, len(relates)):
+    #     annotated_document = tagme_docs[i]
+    #     annotated_document['relatedness'] = relates[i]
+    #     outfilename = output_filenames[i]
+
+    #     if annotated_document['relatedness'] is None:
+    #         logger.error('Relatedness errors for document {0}. Skipped.'
+    #                         .format(input_filename))
+    #         errors += 1
+
+    #     outdir = os.path.dirname(outfilename)
+    #     if not os.path.exists(outdir):
+    #         os.makedirs(outdir)
+
+    #     with open(outfilename, 'w') as f:
+    #        json.dump(annotated_document, f, indent=4, sort_keys=True)
 
 
 
