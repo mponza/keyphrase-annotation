@@ -7,7 +7,7 @@ DATASET_DIRS = {
 
                 'inspec-train': 'inspec/train',
                 'inspec-val': 'inspec/val',
-                'inspec-test': 'inspec/test',
+                'inspec-test': 'inspec/test'
 
-                'nus': 'nus'
+                # 'nus': 'nus'
             }
